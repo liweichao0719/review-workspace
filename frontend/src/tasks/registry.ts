@@ -1,5 +1,6 @@
 import { articleReviewTaskPlugin } from "./article-review/plugin";
 import { fidicRagTaskPlugin } from "./fidic-rag/plugin";
+import { graphReviewTaskPlugin } from "./graph-review/plugin";
 import type { TaskPlugin } from "./types";
 
 const plugins = new Map<string, TaskPlugin>();
@@ -17,3 +18,4 @@ export function getTaskPlugin(rendererKey: string): TaskPlugin | undefined {
 
 registerTaskPlugin(articleReviewTaskPlugin);
 registerTaskPlugin(fidicRagTaskPlugin);
+registerTaskPlugin(graphReviewTaskPlugin);

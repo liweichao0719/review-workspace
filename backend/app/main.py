@@ -10,6 +10,7 @@ from fastapi.responses import Response
 
 from app.adapters import AdapterRegistry
 from app.adapters.demo_articles import DemoArticleAdapter
+from app.adapters.demo_graphs import DemoGraphAdapter
 from app.adapters.fidic_rag import FidicRagAdapter
 from app.models import (
     ProjectDescriptor,
@@ -56,6 +57,7 @@ def register_available_adapters() -> None:
         "on",
     }:
         registry.register(DemoArticleAdapter())
+        registry.register(DemoGraphAdapter())
 
 
 register_available_adapters()

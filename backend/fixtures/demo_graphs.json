@@ -1,0 +1,245 @@
+[
+  {
+    "id": "graph_001",
+    "title": "东部港口夜间装卸受限",
+    "source_name": "示例物流快报",
+    "published_at": "2026-08-12",
+    "language": "zh-CN",
+    "text": "8月12日，东部港口因岸桥控制系统异常，暂停了两个夜间装卸窗口。等待泊位的集装箱船增加到六艘，冷链货物平均延误九小时。港口启用了备用控制台，并把高时效货物转移到南区泊位。运营方预计次日中午恢复正常。",
+    "model_graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "risk_event",
+          "label": "岸桥控制系统异常",
+          "evidence": "岸桥控制系统异常"
+        },
+        {
+          "id": "n2",
+          "type": "impact",
+          "label": "冷链货物平均延误九小时",
+          "evidence": "冷链货物平均延误九小时"
+        },
+        {
+          "id": "n3",
+          "type": "control",
+          "label": "启用备用控制台",
+          "evidence": "港口启用了备用控制台"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n1",
+          "target": "n2",
+          "type": "causes",
+          "evidence": "冷链货物平均延误九小时"
+        },
+        {
+          "id": "e2",
+          "source": "n3",
+          "target": "n2",
+          "type": "mitigates",
+          "evidence": "港口启用了备用控制台，并把高时效货物转移到南区泊位"
+        }
+      ]
+    }
+  },
+  {
+    "id": "graph_002",
+    "title": "医院预约平台短时中断",
+    "source_name": "示例城市运行简报",
+    "published_at": "2026-08-13",
+    "language": "zh-CN",
+    "text": "市立医院周一上午的预约平台因数据库连接池耗尽，连续中断四十分钟。约一千二百名用户无法提交预约，门诊大厅出现短时排队。技术团队扩容连接池并重启两个服务实例后，平台于十一时恢复。医院随后增加了连接数告警阈值。",
+    "model_graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "vulnerability",
+          "label": "数据库连接池耗尽",
+          "evidence": "数据库连接池耗尽"
+        },
+        {
+          "id": "n2",
+          "type": "impact",
+          "label": "用户无法提交预约",
+          "evidence": "约一千二百名用户无法提交预约"
+        },
+        {
+          "id": "n3",
+          "type": "control",
+          "label": "扩容连接池并重启服务",
+          "evidence": "技术团队扩容连接池并重启两个服务实例"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n1",
+          "target": "n2",
+          "type": "causes",
+          "evidence": "约一千二百名用户无法提交预约"
+        },
+        {
+          "id": "e2",
+          "source": "n3",
+          "target": "n2",
+          "type": "mitigates",
+          "evidence": "平台于十一时恢复"
+        }
+      ]
+    }
+  },
+  {
+    "id": "graph_003",
+    "title": "银行兑付谣言引发网点聚集",
+    "source_name": "示例舆情观察",
+    "published_at": "2026-08-14",
+    "language": "zh-CN",
+    "text": "社交平台流传“青岚银行无法兑付”的截图，截图未标明消息来源。两小时内，三家营业网点出现客户集中取现。银行发布流动性充足声明，并公布经审计的季度指标。当地金融管理部门确认各项支付系统运行正常。",
+    "model_graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "risk_event",
+          "label": "无法兑付谣言传播",
+          "evidence": "社交平台流传“青岚银行无法兑付”的截图"
+        },
+        {
+          "id": "n2",
+          "type": "impact",
+          "label": "客户集中取现",
+          "evidence": "三家营业网点出现客户集中取现"
+        },
+        {
+          "id": "n3",
+          "type": "control",
+          "label": "发布流动性充足声明",
+          "evidence": "银行发布流动性充足声明"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n1",
+          "target": "n2",
+          "type": "contributes_to",
+          "evidence": "两小时内，三家营业网点出现客户集中取现"
+        },
+        {
+          "id": "e2",
+          "source": "n3",
+          "target": "n1",
+          "type": "mitigates",
+          "evidence": "银行发布流动性充足声明，并公布经审计的季度指标"
+        }
+      ]
+    }
+  },
+  {
+    "id": "graph_004",
+    "title": "跨江大桥传感器读数异常",
+    "source_name": "示例设施巡检日报",
+    "published_at": "2026-08-15",
+    "language": "zh-CN",
+    "text": "跨江大桥三号墩的振动传感器连续报告异常峰值，但现场巡检未发现结构裂缝。维护人员发现传感器外壳进水，信号线接头存在轻微腐蚀。管理方临时降低大型车辆通行速度，并更换了传感器和接头。校准后的读数恢复到正常区间。",
+    "model_graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "risk_event",
+          "label": "振动传感器报告异常峰值",
+          "evidence": "振动传感器连续报告异常峰值"
+        },
+        {
+          "id": "n2",
+          "type": "vulnerability",
+          "label": "传感器外壳进水",
+          "evidence": "传感器外壳进水"
+        },
+        {
+          "id": "n3",
+          "type": "control",
+          "label": "更换传感器和接头",
+          "evidence": "更换了传感器和接头"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n2",
+          "target": "n1",
+          "type": "indicates",
+          "evidence": "维护人员发现传感器外壳进水"
+        },
+        {
+          "id": "e2",
+          "source": "n3",
+          "target": "n1",
+          "type": "mitigates",
+          "evidence": "校准后的读数恢复到正常区间"
+        }
+      ]
+    }
+  },
+  {
+    "id": "graph_005",
+    "title": "仿冒报销邮件窃取员工凭据",
+    "source_name": "示例安全事件通报",
+    "published_at": "2026-08-16",
+    "language": "zh-CN",
+    "text": "多名员工收到主题为“报销单退回”的仿冒邮件，邮件链接指向伪造的统一登录页面。五名员工输入了账户密码，其中一个账户随后出现异地登录。安全团队重置了相关密码，撤销活跃会话，并在邮件网关封禁仿冒域名。全员多因素认证将在本周内强制启用。",
+    "model_graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "risk_event",
+          "label": "仿冒邮件窃取凭据",
+          "evidence": "多名员工收到主题为“报销单退回”的仿冒邮件"
+        },
+        {
+          "id": "n2",
+          "type": "vulnerability",
+          "label": "员工输入账户密码",
+          "evidence": "五名员工输入了账户密码"
+        },
+        {
+          "id": "n3",
+          "type": "impact",
+          "label": "账户出现异地登录",
+          "evidence": "其中一个账户随后出现异地登录"
+        },
+        {
+          "id": "n4",
+          "type": "control",
+          "label": "重置密码并撤销会话",
+          "evidence": "安全团队重置了相关密码，撤销活跃会话"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n1",
+          "target": "n2",
+          "type": "causes",
+          "evidence": "邮件链接指向伪造的统一登录页面"
+        },
+        {
+          "id": "e2",
+          "source": "n2",
+          "target": "n3",
+          "type": "contributes_to",
+          "evidence": "其中一个账户随后出现异地登录"
+        },
+        {
+          "id": "e3",
+          "source": "n4",
+          "target": "n3",
+          "type": "mitigates",
+          "evidence": "安全团队重置了相关密码，撤销活跃会话"
+        }
+      ]
+    }
+  }
+]
