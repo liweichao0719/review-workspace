@@ -1,0 +1,10 @@
+.frozen-card { padding: 20px 22px; border-top: 3px solid #2b63cc; }
+.frozen-card .assessment-head > div { min-width: 0; }
+.frozen-card .assessment-head small {
+  display: block;
+  margin-top: 4px;
+  color: #8993a3;
+  font-size: 9px;
+}
+.frozen-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.decision-panel { max-height: calc(100vh - 112px); overflow-y: auto; }

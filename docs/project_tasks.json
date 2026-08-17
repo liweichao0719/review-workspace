@@ -1,0 +1,164 @@
+{
+  "version": 2,
+  "title": "Review Workspace",
+  "updated_at": "2026-08-17",
+  "tasks": [
+    {
+      "id": "platform_foundation",
+      "title": "阶段 01：独立平台与通用基础设施",
+      "status": "done",
+      "items": [
+        {
+          "id": "independent_repository",
+          "title": "建立独立项目，采用 FastAPI、React、TypeScript、Vite 与 SQLite",
+          "status": "done"
+        },
+        {
+          "id": "shared_adapter_contract",
+          "title": "定义项目描述、任务、列表、详情、校验与保存的适配器边界",
+          "status": "done"
+        },
+        {
+          "id": "versioned_review_store",
+          "title": "实现按项目、任务、样本和数据指纹隔离的 SQLite 审核存储与修订历史",
+          "status": "done"
+        },
+        {
+          "id": "common_workspace_shell",
+          "title": "实现项目与任务选择、列表、筛选、进度、保存状态和导出入口",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "fidic_rag_dev192",
+      "title": "阶段 02：FIDIC RAG 冻结开发集审查闭环",
+      "status": "done",
+      "items": [
+        {
+          "id": "frozen_dev192_adapter",
+          "title": "适配器只读取冻结的192题开发集、版本清单和双语语料",
+          "status": "done"
+        },
+        {
+          "id": "review_scope_boundary",
+          "title": "页面只呈现题型、问题、标准答案和上下文；检索与模型候选不混入审查对象",
+          "status": "done"
+        },
+        {
+          "id": "independent_review_integrity",
+          "title": "SQLite独立保存、数据版本隔离、自动保存、筛选、导出和引用—上下文一致性校验完成",
+          "status": "done"
+        },
+        {
+          "id": "fidic_verification",
+          "title": "后端接口测试、前端生产构建与本地真实数据验证通过",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "multi_type_contract",
+      "title": "阶段 03：通用与专用边界验证",
+      "status": "done",
+      "items": [
+        {
+          "id": "task_renderer_registry",
+          "title": "前端拆分为公共 WorkspaceShell、任务注册表和专属任务组件",
+          "status": "done"
+        },
+        {
+          "id": "opaque_review_patch",
+          "title": "公共前端与 API 只传递通用审核补丁，不解释业务字段",
+          "status": "done"
+        },
+        {
+          "id": "task_scoped_versions",
+          "title": "数据版本指纹按任务隔离，支持同一项目下不同数据源",
+          "status": "done"
+        },
+        {
+          "id": "item_specific_validation",
+          "title": "条目专属校验和审核恢复逻辑下沉到适配器",
+          "status": "done"
+        },
+        {
+          "id": "synthetic_article_task",
+          "title": "使用10条合成文章验证独立字段、界面、证据摘录校验和环境变量启用",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": "representative_data_types",
+      "title": "阶段 04：代表性数据类型扩展",
+      "status": "pending",
+      "items": [
+        {
+          "id": "graph_review_fixture",
+          "title": "用合成原文、节点、关系和证据跨度验证结构化图编辑",
+          "status": "pending"
+        },
+        {
+          "id": "source_format_matrix",
+          "title": "验证 JSONL、CSV、JSON 与 SQLite 数据源的适配器实现模式",
+          "status": "pending"
+        },
+        {
+          "id": "adapter_contract_suite",
+          "title": "形成所有适配器共用的契约测试套件",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "real_data_adapters",
+      "title": "阶段 05：接入新的真实数据源",
+      "status": "pending",
+      "items": [
+        {
+          "id": "fresh_source_inventory",
+          "title": "重新确认仍在使用的数据源、稳定ID、审核字段、校验和导出需求",
+          "status": "pending"
+        },
+        {
+          "id": "first_real_non_fidic_adapter",
+          "title": "选择一个当前有效的非FIDIC数据源完成真实接入",
+          "status": "pending"
+        },
+        {
+          "id": "real_workflow_validation",
+          "title": "通过真实人工试用验证读取、修改、恢复、筛选和导出",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "generalization_hardening",
+      "title": "阶段 06：工程加固",
+      "status": "pending",
+      "items": [
+        {
+          "id": "review_migrations",
+          "title": "补充数据格式变化后的审核记录迁移、备份与恢复工具",
+          "status": "pending"
+        },
+        {
+          "id": "optimistic_concurrency",
+          "title": "增加基于修订号的冲突检测并完善自动保存边界",
+          "status": "pending"
+        },
+        {
+          "id": "end_to_end_tests",
+          "title": "增加浏览器端到端测试和代表性任务回归样例",
+          "status": "pending"
+        },
+        {
+          "id": "multi_user_deferred",
+          "title": "单人本地流程稳定后再评估身份、权限与多人冲突处理",
+          "status": "pending"
+        }
+      ]
+    }
+  ]
+}
