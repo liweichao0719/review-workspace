@@ -92,22 +92,22 @@
     {
       "id": "representative_data_types",
       "title": "阶段 04：代表性数据类型扩展",
-      "status": "pending",
+      "status": "done",
       "items": [
         {
           "id": "graph_review_fixture",
           "title": "用合成原文、节点、关系和证据跨度验证结构化图编辑",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": "source_format_matrix",
           "title": "验证 JSONL、CSV、JSON 与 SQLite 数据源的适配器实现模式",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": "adapter_contract_suite",
           "title": "形成所有适配器共用的契约测试套件",
-          "status": "pending"
+          "status": "done"
         }
       ]
     },
@@ -136,7 +136,7 @@
     {
       "id": "generalization_hardening",
       "title": "阶段 06：工程加固",
-      "status": "pending",
+      "status": "in_progress",
       "items": [
         {
           "id": "review_migrations",
@@ -151,7 +151,12 @@
         {
           "id": "end_to_end_tests",
           "title": "增加浏览器端到端测试和代表性任务回归样例",
-          "status": "pending"
+          "status": "done"
+        },
+        {
+          "id": "demo_launcher",
+          "title": "提供依赖与端口预检、独立审核库和联动退出的一键 Demo 启动脚本",
+          "status": "done"
         },
         {
           "id": "multi_user_deferred",
