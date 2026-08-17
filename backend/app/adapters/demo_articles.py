@@ -32,6 +32,13 @@ def _sha256(path: Path) -> str:
 class DemoArticleAdapter(ReviewAdapter):
     """Small synthetic article task used to exercise the adapter boundary."""
 
+    project_id = "demo_articles"
+    project_name = "示例：文章筛选"
+    project_description = "用于验证多数据类型边界的本地合成文章"
+    task_name = "文章收录审查"
+    task_description = "阅读文章并复核收录决定、相关性、标签与证据摘录。"
+    source_capabilities: tuple[str, ...] = ()
+
     def __init__(self, path: Path | None = None) -> None:
         default_path = Path(__file__).resolve().parents[2] / "fixtures/demo_articles.jsonl"
         self.path = Path(path or default_path).resolve()
@@ -42,14 +49,14 @@ class DemoArticleAdapter(ReviewAdapter):
     @property
     def descriptor(self) -> ProjectDescriptor:
         return ProjectDescriptor(
-            id="demo_articles",
-            name="示例：文章筛选",
-            description="用于验证多数据类型边界的本地合成文章",
+            id=self.project_id,
+            name=self.project_name,
+            description=self.project_description,
             tasks=[
                 ProjectTask(
                     id=TASK_ID,
-                    name="文章收录审查",
-                    description="阅读文章并复核收录决定、相关性、标签与证据摘录。",
+                    name=self.task_name,
+                    description=self.task_description,
                     renderer_key="article_review",
                     capabilities=[
                         "edit",
@@ -57,6 +64,7 @@ class DemoArticleAdapter(ReviewAdapter):
                         "export",
                         "evidence_quote",
                         "versioned_reviews",
+                        *self.source_capabilities,
                     ],
                     statuses=[
                         {"value": "pending", "label": "待复核"},
@@ -84,16 +92,57 @@ class DemoArticleAdapter(ReviewAdapter):
             if not isinstance(value, dict):
                 raise ValueError(f"{self.path}:{line_number} must be an object")
             rows.append(value)
+        self._set_rows(rows, f"demo-articles-{_sha256(self.path)[:12]}")
+
+    def _set_rows(self, rows: list[dict[str, Any]], dataset_version: str) -> None:
         item_ids = [str(row.get("id", "")) for row in rows]
         if not rows or any(not item_id for item_id in item_ids):
             raise ValueError("demo articles require non-empty IDs")
         if len(item_ids) != len(set(item_ids)):
             raise ValueError("demo article IDs must be unique")
+        for item_id, row in zip(item_ids, rows, strict=True):
+            self._validate_source_row(item_id, row)
         self._items = {str(row["id"]): row for row in rows}
         self._positions = {
             item_id: position for position, item_id in enumerate(item_ids, start=1)
         }
-        self._dataset_version = f"demo-articles-{_sha256(self.path)[:12]}"
+        self._dataset_version = dataset_version
+
+    @staticmethod
+    def _validate_source_row(item_id: str, row: dict[str, Any]) -> None:
+        for field in (
+            "title",
+            "body",
+            "source_name",
+            "published_at",
+            "language",
+        ):
+            if not isinstance(row.get(field), str) or not row[field].strip():
+                raise ValueError(f"demo article {item_id} requires string field {field}")
+        topics = row.get("topics")
+        if not isinstance(topics, list) or any(
+            not isinstance(topic, str) for topic in topics
+        ):
+            raise ValueError(f"demo article {item_id} topics must be a string list")
+        suggestion = row.get("model_suggestion")
+        if not isinstance(suggestion, dict):
+            raise ValueError(f"demo article {item_id} requires a model suggestion")
+        confidence = suggestion.get("confidence")
+        if (
+            suggestion.get("decision") not in DECISIONS
+            or isinstance(confidence, bool)
+            or not isinstance(confidence, (int, float))
+            or not 0 <= confidence <= 1
+            or not isinstance(suggestion.get("reason"), str)
+        ):
+            raise ValueError(f"demo article {item_id} has an invalid model suggestion")
+        suggested_tags = suggestion.get("suggested_tags")
+        if not isinstance(suggested_tags, list) or any(
+            not isinstance(tag, str) for tag in suggested_tags
+        ):
+            raise ValueError(
+                f"demo article {item_id} suggested tags must be a string list"
+            )
 
     def list_items(
         self,

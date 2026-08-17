@@ -203,6 +203,7 @@ export function WorkspaceShell() {
             <label>
               <span>项目</span>
               <select
+                data-testid="project-select"
                 value={project?.id ?? ""}
                 onChange={(event) => {
                   const next = projects.find(
@@ -221,6 +222,7 @@ export function WorkspaceShell() {
             <label>
               <span>审查任务</span>
               <select
+                data-testid="task-select"
                 value={task?.id ?? ""}
                 onChange={(event) => {
                   setTask(

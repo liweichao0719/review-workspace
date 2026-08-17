@@ -99,7 +99,7 @@ export function ArticleReviewView({
           </section>
         </div>
 
-        <aside className="decision-panel">
+        <aside className="decision-panel" data-testid="article-review-form">
           <div className="decision-title">
             <div>
               <span>文章审查</span>
